@@ -42,6 +42,9 @@ pip install -q "pyclipper>=1.2.1" "shapely>=1.7.1"
 
 pip install python-dotenv
 pip install selenium
+
+https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0.1/windows/w_openvino_toolkit_windows_2023.0.1.11005.fa1c41994f3_x86_64.zip
+=> C:\Program Files (x86)\Intel\openvino_2023 이름으로 압축해제
 ```
 
 ## Steps to build
@@ -49,7 +52,7 @@ pip install selenium
 * (프로젝트를 실행을 위해 빌드 절차 기술)
 ```
 "C:\Program Files (x86)\Intel\openvino_2023\setupvars.bat"
-C:\Users\AIoT03\Desktop\intelai\0705\.venv\Scripts\activate
+<your path>\.venv\Scripts\activate
 ```
 
 ## Steps to run
@@ -67,7 +70,7 @@ python text_detect_inImage.py
 MY_ID = id
 MY_PW = pw
 
-python .\ai_attendance.py -fg "C:\Users\AIOT2\intelAI\fg_gallaray"
+python .\ai_attendance.py -fg "<your path>\fg_gallaray"
 ```
 
 ## Output
