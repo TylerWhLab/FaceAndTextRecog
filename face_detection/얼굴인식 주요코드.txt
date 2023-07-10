@@ -1,0 +1,31 @@
+def draw_detections(frame, frame_processor, detections, output_transform):
+    size = frame.shape[:2]
+    face_id = 0
+    frame = output_transform.resize(frame)
+    for roi, landmarks, identity in zip(*detections):
+        face_id = identity.id
+
+        text = frame_processor.face_identifier.get_identity_label(identity.id)
+        if identity.id != FaceIdentifier.UNKNOWN_ID:
+            text += ' %.2f%%' % (100.0 * (1 - identity.distance))
+        else :
+            text = "Unregisted face"
+
+        xmin = max(int(roi.position[0]), 0)
+        ymin = max(int(roi.position[1]), 0)
+        xmax = min(int(roi.position[0] + roi.size[0]), size[1])
+        ymax = min(int(roi.position[1] + roi.size[1]), size[0])
+        xmin, ymin, xmax, ymax = output_transform.scale([xmin, ymin, xmax, ymax])
+
+        if(face_id > 0) :
+            cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 220, 0), 2)
+        else :
+            cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0, 0, 220), 7)
+        cv2.circle(frame, (int((xmin+xmax)/2), int((ymin+ymax)/2)), 1, (0, 255, 255), 2)
+        textsize = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 1)[0]
+        if(face_id > 0) :
+            cv2.rectangle(frame, (xmin+20, ymin-20), (xmin+20 + textsize[0], ymin - textsize[1]-20), (255, 255, 255), cv2.FILLED)
+            cv2.putText(frame, text, (xmin+20, ymin-20), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 1)
+        else :
+            cv2.rectangle(frame, (xmin+5, ymin-20), (xmin + textsize[0], ymin - textsize[1]-20), (0, 0, 255), cv2.FILLED)
+            cv2.putText(frame, text, (xmin, ymin-20), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 1)

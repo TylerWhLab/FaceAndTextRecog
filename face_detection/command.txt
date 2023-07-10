@@ -1,0 +1,8 @@
+# pip install python-dotenv
+# pip install selenium
+
+#.env
+MY_ID = id
+MY_PW = pw
+
+python .\ai_attendance.py -fg "C:\Users\AIOT2\intelAI\fg_gallaray"
