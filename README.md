@@ -76,6 +76,8 @@ python .\ai_attendance.py -fg "<your path>\fg_gallaray"
 ## Output
 
 ![./text.png](./text.png)
+![./facerecog.png](./facerecog.png)
+
 
 ## Appendix
 
